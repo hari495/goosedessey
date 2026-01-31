@@ -1,0 +1,769 @@
+:root {
+    /* --- The Physics of "Squircular" Geometry --- */
+    --radius-xl: 24px;
+    /* Containers */
+    --radius-lg: 16px;
+    /* Cards */
+    /* Buttons/Inputs */
+    --radius-md: 6px;
+    /* Inner elements */
+    --radius-sm: 4px;
+
+    /* --- Materiality & The "Z-Axis" (Glassmorphism) --- */
+    /* Light Mode (Default) */
+    --glass-bg: #ffffff;
+    /* Solid white for less minimalism */
+    --glass-border: 2px solid #000000;
+    /* Thick black border */
+    --glass-highlight: none;
+    --glass-shadow: none;
+    /* Neo-brutalist shadow */
+
+    --backdrop-blur: none;
+    /* Remove blur for solid look */
+
+    /* Colors - Exams */
+    --final-grad-start: #ffe6e6;
+    --final-grad-end: #ffffff;
+    --final-accent: #dc3545;
+
+    --midterm-grad-start: #ffe8d6;
+    --midterm-grad-end: #ffffff;
+    --midterm-accent: #fd7e14;
+
+    /* Colors - Brand */
+    --primary-color: #000000;
+    /* Black primary */
+    --bg-app: #f0f0f0;
+
+    /* Typography */
+    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+
+    /* Opacity Hierarchy */
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-tertiary: #444444;
+
+    /* Button Contrast */
+    --btn-bg: #000000;
+    --btn-text: #ffffff;
+    --input-bg: #000000;
+    --input-hover: #333333;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+    --glass-bg: #000000;
+    --glass-border: 2px solid #ffffff;
+    --glass-shadow: none;
+
+    --primary-color: #ffffff;
+    --bg-app: #121212;
+
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-tertiary: #aaaaaa;
+
+    --btn-bg: #ffffff;
+    --btn-text: #000000;
+    --input-bg: #1c1c1e;
+    --input-hover: #333333;
+}
+
+/* Global Reset & Swiss Typography Base */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    line-height: 1.5;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- The Dashboard Container --- */
+#odyssey-dashboard {
+    font-family: var(--font-stack);
+    max-width: 95%;
+    margin: 40px auto;
+    padding: 40px;
+
+    background: var(--glass-bg);
+    /* Solid background now */
+    border-radius: var(--radius-xl);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+}
+
+/* --- Headers (Heavy Contrast) --- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    /* Increased to breathe */
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 900;
+    /* Heavier weight */
+    letter-spacing: -0.05em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    /* More aggressive aesthetic */
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 16px 0 24px;
+    /* Increased to match */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid var(--text-primary);
+    /* Solid line instead of thin opacity */
+    padding-bottom: 8px;
+}
+
+/* ... existing code ... */
+
+#courseFilterBtn {
+    text-transform: none !important;
+    /* User requested "All Courses" not caps */
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    text-transform: none !important;
+    /* User requested "All Courses" not caps */
+    transition: background 0.1s;
+}
+
+.section-title::after {
+    display: none;
+    /* Remove the old thin divider */
+}
+
+/* --- Controls & Inputs (The Soul of Interaction) --- */
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Styled Dropdowns & Buttons */
+/* Dark Mode Dropdown Styles handled via logic */
+
+button {
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--text-primary);
+    background-color: #000000 !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+}
+
+button:hover {
+    transform: none;
+    background-color: #e0e0e0 !important;
+    /* Light grey - subtle whitish */
+    color: #000000 !important;
+}
+
+[data-theme="dark"] button:hover {
+    background-color: #cccccc;
+    color: #000000;
+}
+
+button:active {
+    transform: none;
+}
+
+/* Active State for Dropdown Button */
+button.active {
+    background-color: var(--text-primary);
+    color: var(--bg-app);
+}
+
+/* Dropdown Menu styling */
+.dropdown-menu {
+    position: absolute;
+    top: 55px;
+    /* Adjust based on button height + margin */
+    left: 0;
+    /* Since it's not nested inside relative parent in all layouts, might need precise positioning, 
+       but here it is inside .controls which flexes. We might need to make .controls relative 
+       or just rely on the fact it's absolute to the nearest positioned ancestor.
+       Actually, content.js structure has button and dropdown as siblings. 
+       Let's assume .controls is sufficient or we create a wrapper. 
+       Wait, simple approach: position relative on .controls won't bind it closely to the button if controls has gaps.
+       Better: Javascript handles logic, but CSS needs to place it.
+       If button is `position: relative` won't help sibling.
+       Actually, best practice is wrapping button + dropdown in a `div.relative`.
+       But user kept structure simple in request. I will make `.controls` relative and just position it relative to controls? No, that puts it weirdly.
+       
+       Let's try to just style it as a floating box.
+    */
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: var(--radius-md);
+    padding: 8px 0;
+    z-index: 1000;
+    min-width: 180px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.1s;
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: #ffffff;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: #333333;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    background: var(--btn-bg);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--text-primary);
+    color: var(--btn-text);
+}
+
+#themeToggle:hover {
+    background: #333333;
+    transform: none;
+    color: #ffffff;
+}
+
+[data-theme="dark"] #themeToggle:hover {
+    background-color: #cccccc;
+    color: #000000;
+}
+
+/* Export Button - Uses general button styles now */
+
+/* Checkbox/Label styling using the class we will add or just sibling selector */
+/* Label styles removed as checkbox is replaced by button */
+
+/* --- Cards (Squircular Surfaces) --- */
+#next-by-subject-container,
+#past-assessments-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.highlight-card {
+    background: var(--glass-bg);
+    /* Use glass bg for cleaner look in dark mode? Or solid? solid is safer for content */
+    background: rgba(255, 255, 255, 1);
+    /* Default light solid */
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--text-primary);
+    /* box-shadow removed */
+
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .highlight-card {
+    background: #1c1c1e;
+    /* Dark Surface */
+}
+
+.highlight-card:hover {
+    transform: none;
+    background-color: #f5f5f5 !important;
+    border: 2px solid var(--text-primary);
+}
+
+[data-theme="dark"] .highlight-card:hover {
+    background-color: #2a2a2a !important;
+}
+
+/* Specific hover for finals - lighter red */
+.highlight-card.final:hover {
+    background: linear-gradient(135deg, #ffcccc, #ffe6e6) !important;
+}
+
+[data-theme="dark"] .highlight-card.final:hover {
+    background: linear-gradient(135deg, #4a2020, #2a1a1a) !important;
+}
+
+/* Specific hover for midterms - lighter orange */
+.highlight-card.midterm:hover {
+    background: linear-gradient(135deg, #ffd9b3, #ffe8d6) !important;
+}
+
+[data-theme="dark"] .highlight-card.midterm:hover {
+    background: linear-gradient(135deg, #4a3020, #2a2010) !important;
+}
+
+/* Exam Highlights - Gradient Surfaces */
+.highlight-card.final {
+    background: linear-gradient(135deg, var(--final-grad-start), var(--final-grad-end));
+}
+
+.highlight-card.final .h-course,
+.highlight-card.final .h-countdown {
+    color: var(--final-accent);
+}
+
+/* In Dark Mode, accent might need to be brighter? var(--final-accent) is #dc3545 (red).
+   Let's ensure text is readable on dark gradient. */
+.highlight-card.midterm {
+    background: linear-gradient(135deg, var(--midterm-grad-start), var(--midterm-grad-end));
+}
+
+.highlight-card.midterm .h-course {
+    color: var(--midterm-accent);
+}
+
+.highlight-card.midterm .h-countdown {
+    color: #e67e22;
+}
+
+/* Past - Muted Material */
+.highlight-card.past {
+    opacity: 0.6;
+    filter: grayscale(100%);
+    background: #e0e0e0;
+    /* Visibly grayer */
+}
+
+[data-theme="dark"] .highlight-card.past {
+    background: #151516;
+}
+
+.highlight-card.past:hover {
+    opacity: 0.9;
+}
+
+
+/* Card Text Typography */
+.h-course {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.h-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.h-time {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.h-countdown {
+    margin-top: 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.highlight-card.ongoing .h-countdown {
+    color: var(--final-accent);
+}
+
+.exam-icons {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    gap: 6px;
+    opacity: 0.9;
+    color: var(--text-primary);
+    /* Default icon color */
+}
+
+/* Specific Override for Exam Cards */
+.highlight-card.final .exam-icons {
+    color: var(--final-accent);
+}
+
+.highlight-card.midterm .exam-icons {
+    color: var(--midterm-accent);
+}
+
+
+/* --- List View (Breathable Rows) --- */
+#upcoming-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.assessment-row {
+    background: #ffffff;
+    padding: 24px 32px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--text-primary);
+    /* box-shadow removed */
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .assessment-row {
+    background: #1c1c1e;
+    /* box-shadow removed */
+}
+
+.assessment-row:hover {
+    transform: none;
+    background-color: #f5f5f5 !important;
+}
+
+[data-theme="dark"] .assessment-row:hover {
+    background-color: #2a2a2a !important;
+}
+
+/* Specific hover for final rows - lighter red */
+.assessment-row.final:hover {
+    background: linear-gradient(90deg, #ffcccc 0%, #ffe6e6 100%) !important;
+    box-shadow: inset 4px 0 0 var(--final-accent), 0 2px 8px rgba(220, 53, 69, 0.1);
+}
+
+[data-theme="dark"] .assessment-row.final:hover {
+    background: linear-gradient(90deg, #4a2020 0%, #2a1a1a 100%) !important;
+}
+
+/* Specific hover for midterm rows - lighter orange */
+.assessment-row.midterm:hover {
+    background: linear-gradient(90deg, #ffd9b3 0%, #ffe8d6 100%) !important;
+    box-shadow: inset 4px 0 0 var(--midterm-accent), 0 2px 8px rgba(253, 126, 20, 0.1);
+}
+
+[data-theme="dark"] .assessment-row.midterm:hover {
+    background: linear-gradient(90deg, #4a3020 0%, #2a2010 100%) !important;
+}
+
+/* Exam Rows - Gradient Fills */
+.assessment-row.final {
+    background: linear-gradient(90deg, var(--final-grad-start) 0%, #ffffff 100%);
+    box-shadow: inset 4px 0 0 var(--final-accent), 0 2px 8px rgba(220, 53, 69, 0.1);
+}
+
+[data-theme="dark"] .assessment-row.final {
+    background: linear-gradient(90deg, var(--final-grad-start) 0%, #1c1c1e 100%);
+}
+
+.assessment-row.midterm {
+    background: linear-gradient(90deg, var(--midterm-grad-start) 0%, #ffffff 100%);
+    box-shadow: inset 4px 0 0 var(--midterm-accent), 0 2px 8px rgba(253, 126, 20, 0.1);
+}
+
+[data-theme="dark"] .assessment-row.midterm {
+    background: linear-gradient(90deg, var(--midterm-grad-start) 0%, #1c1c1e 100%);
+}
+
+.row-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    /* More breathing room */
+    flex: 1;
+}
+
+.row-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    text-align: center;
+    padding-right: 32px;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .row-date {
+    border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+.date-month {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    letter-spacing: 0.05em;
+}
+
+.date-day {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.row-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.row-course {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-color);
+}
+
+.row-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.row-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.row-countdown {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* --- Modal (Glass Overlay) Fix --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    /* Strong Glass Background */
+    background: rgba(245, 245, 247, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Higher index */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="dark"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 600px;
+    border-radius: var(--radius-xl);
+    padding: 48px;
+
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.04);
+
+    transform: scale(0.92);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .modal-content {
+    background: #1c1c1e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-overlay.open .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .modal-close {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+}
+
+.modal-header {
+    margin-bottom: 40px;
+}
+
+.modal-course {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.modal-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.modal-value {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* Modal Exam Themes */
+.modal-content.final {
+    background: linear-gradient(180deg, var(--final-grad-start) 0%, #ffffff 80%);
+    border-left: none;
+    box-shadow:
+        0 24px 48px rgba(220, 53, 69, 0.15),
+        inset 0 0 0 1px rgba(220, 53, 69, 0.1);
+}
+
+[data-theme="dark"] .modal-content.final {
+    background: linear-gradient(180deg, var(--final-grad-start) 0%, #1c1c1e 80%);
+}
+
+.modal-content.midterm {
+    background: linear-gradient(180deg, var(--midterm-grad-start) 0%, #ffffff 80%);
+    box-shadow:
+        0 24px 48px rgba(253, 126, 20, 0.15),
+        inset 0 0 0 1px rgba(253, 126, 20, 0.1);
+}
+
+[data-theme="dark"] .modal-content.midterm {
+    background: linear-gradient(180deg, var(--midterm-grad-start) 0%, #1c1c1e 80%);
+}
+
+.modal-content.final .modal-course {
+    color: var(--final-accent);
+}
+
+.modal-content.midterm .modal-course {
+    color: var(--midterm-accent);
+}
+
+/* Hide original table */
+#assessment-schedule-original {
+    display: none;
+}

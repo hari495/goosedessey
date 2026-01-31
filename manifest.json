@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Odyssey Schedule Enhancer",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://odyssey.uwaterloo.ca/teaching/schedule*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
