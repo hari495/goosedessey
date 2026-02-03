@@ -1,6 +1,6 @@
 # Goosedyssey 🪿
 
-**The modern UI overhaul for the University of Waterloo's Odyssey exam schedule.**
+**The modern UI overhaul for the University of Waterloo's Odyssey exam schedule System.**
 
 Goosedyssey transforms the standard (and slightly outdated) Odyssey table into a clean, responsive, and feature-rich dashboard. Stop squinting at rows of text—get countdowns, visual alerts for midterms, and one-click calendar exports.
 
