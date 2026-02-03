@@ -4,12 +4,12 @@
 
 Goosedyssey transforms the standard (and slightly outdated) Odyssey table into a clean, responsive, and feature-rich dashboard. Stop squinting at rows of text—get countdowns, visual alerts for midterms, and one-click calendar exports.
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Available-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromewebstore.google.com/detail/goosedessey/jlbdageklahnfedmlblfbmickaajkbha)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Available-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromewebstore.google.com/detail/jlbdageklahnfedmlblfbmickaajkbha?utm_source=item-share-cb)
 ![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)
 
 ## 📥 Install
 
-**[Click here to add to Chrome](https://chromewebstore.google.com/detail/goosedessey/jlbdageklahnfedmlblfbmickaajkbha)**
+**[Click here to add to Chrome](https://chromewebstore.google.com/detail/jlbdageklahnfedmlblfbmickaajkbha?utm_source=item-share-cb)**
 
 *(No manual setup required. Just install and go!)*
 
