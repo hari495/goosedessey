@@ -1,6 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Odyssey Schedule Enhancer",
+  "name": "Goosedessey",
+  "description": "Transforms the UWaterloo Odyssey schedule into a modern, readable dashboard with countdowns and smart filtering.",
+  "icons": {
+    "128": "icon.png"
+  },
   "version": "1.0",
   "content_scripts": [
     {
@@ -8,5 +12,8 @@
       "js": ["content.js"],
       "css": ["styles.css"]
     }
+  ],
+  "host_permissions": [
+    "https://odyssey.uwaterloo.ca/*"
   ]
 }
